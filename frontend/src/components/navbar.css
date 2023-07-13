@@ -1,0 +1,57 @@
+
+.golden-bg {
+    background-color: #FEBE10;
+}
+
+.blue-bg {
+    background-color: #00529F;
+}
+
+.blue-text{
+    font-size: 27px;
+    color: #00529F;;
+}
+
+.logo-image {
+    width: 70px;
+    height: auto;
+    padding: 10px;/* Maintain aspect ratio */
+}
+
+.inner-banner-container{
+    display: flex;
+    column-gap: 10px;
+    flex-wrap: nowrap;
+    background-color: #FEBE10;
+}
+
+/*used to prevent the resizing of the individual cells of the flexbox*/
+.inner-banner-container > *{
+    flex-shrink: 0;
+}
+
+.inner-banner-container-buttons > *{
+    flex-shrink: 0;
+}
+.inner-banner-container-buttons{
+    column-gap: 10px;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    overflow-x: auto;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-left: auto; /* Add margin-left:auto to push it to the right */
+}
+
+.website-title{
+    font-size: 40px;
+    font-family: "Roboto Light";
+    color: aliceblue;
+}
+.space-center{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
