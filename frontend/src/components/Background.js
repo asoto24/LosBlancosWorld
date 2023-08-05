@@ -18,9 +18,12 @@ const Background = () => {
         };
 
     }, [])
+    /**
+     * renders the text next to the logo
+     */
     useEffect(() => {
         console.log("I print once")
-        const text = 'Historia que hiciste, historia por hacer\nMadrid, Madrid, Hala Madrid, Madrid';
+        const text = 'Hala Madrid y nada mas!';
         const timer = setInterval(() => {
             setTypedWord(prevTypedWord => prevTypedWord + text.charAt(index));
             setIndex(prevIndex => prevIndex + 1);
