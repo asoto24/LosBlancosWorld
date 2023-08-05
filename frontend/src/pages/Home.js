@@ -1,12 +1,19 @@
 import Navbar from "../components/Navbar";
 import Background from "../components/Background";
+import { useEffect, useState } from "react";
+import "../stylesheets/home.css";
 
 const Home = () => {
-    return (<>
-            <Navbar/>
-            <Background/>
-        </>
-    )
-}
+    return (
+        <div className="home-container">
+            <div className="navbar-container">
+                <Navbar />
+            </div>
+            <div className="content-container">
+                <Background />
+            </div>
+        </div>
+    );
+};
 
 export default Home;

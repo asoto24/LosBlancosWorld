@@ -1,0 +1,16 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll; /* Enable vertical scrolling for the entire flex container */
+}
+
+.navbar-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.content-container {
+    flex: 1;
+}

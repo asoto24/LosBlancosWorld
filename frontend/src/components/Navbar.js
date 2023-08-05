@@ -5,7 +5,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo from '../assets/madrid_logo.png'; // Path to your logo image
-import './navbar.css'
+import '../stylesheets/navbar.css'
 
 
 /**
@@ -32,7 +32,7 @@ const Banner = () =>{
  * status of the user, logged in or not.
  */
 const Navbar = () =>{
-    return (<>
+    return (<div>
             <Banner/>
             <nav className="navbar navbar-dark blue-bg">
                 <div className="container-fluid">
@@ -43,6 +43,6 @@ const Navbar = () =>{
                     </button>
                 </div>
             </nav>
-        </>)
+        </div>)
 }
 export default Navbar;

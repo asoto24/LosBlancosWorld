@@ -21,8 +21,8 @@
 .inner-banner-container{
     display: flex;
     column-gap: 10px;
-    flex-wrap: nowrap;
     background-color: #FEBE10;
+
 }
 
 /*used to prevent the resizing of the individual cells of the flexbox*/

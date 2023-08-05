@@ -1,0 +1,43 @@
+/*this background container will keep the background
+ in the middle of the screen even when things shift.
+ */
+.background-container{
+    display:flex;
+    column-gap: 1%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.image-container {
+    height: 100vh; /* Adjust the height as needed */
+    overflow: hidden;
+    opacity: 0; /* Initially set opacity to 0 */
+    transition: opacity 3s ease-in-out; /* Add transition effect */
+}
+
+.image-container.loaded {
+    opacity: 1; /* Set opacity to 1 when loaded class is added */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure the image doesn't exceed the container width */
+    max-height: 100% /* Ensure the image doesn't exceed the container height */
+}
+
+
+.typewriter {
+    max-width: 600px;
+    text-align: center;
+}
+
+.typewriter h1 {
+    color: #FEBE10;
+    font-family: monospace;
+    overflow-wrap: break-word;
+    margin: 0 auto;
+    letter-spacing: .15em;
+}
+
+
+
