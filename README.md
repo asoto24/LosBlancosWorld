@@ -6,7 +6,7 @@ This website is for fans of Real Madrid FC, it contains a collection of photos a
     - Javascript, CSS, HTML
     - React, bootstrap
 - backend:
-    - Python
-    - Django
+    - Java
+    - Spring Boot
     - PostgresSQL
     - MAYBE IN THE FUTURE AWS
