@@ -34,7 +34,7 @@ public class DatabaseConfiguration {
     private String dbPassword;
     @Bean
     public DataSource getPostgresDataSource(){
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
         dataSourceBuilder.url("jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName);
         dataSourceBuilder.username(dbUserName);
