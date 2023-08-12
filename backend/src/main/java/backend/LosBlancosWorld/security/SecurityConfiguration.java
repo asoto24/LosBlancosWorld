@@ -1,53 +1,60 @@
 package backend.LosBlancosWorld.security;
 
+import org.apache.catalina.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import backend.LosBlancosWorld.service.CustomUserDetailsService;
 import javax.sql.DataSource;
+import java.security.Security;
 
 @Configuration
-
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
+    private UserDetailsService userDetailsService;
 
-    /**
-     * Dependency injectiona,
-     * takes the main database we will use
-     * for this project, which is postgres
-     */
-    @Autowired
-    private DataSource dataSource;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public SecurityConfiguration(UserDetailsService userDetailsService){
+        this.userDetailsService = userDetailsService;
+    }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder)
-                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, 'ROLE_USER' FROM users WHERE username = ?");
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+        return configuration.getAuthenticationManager();
     }
 
 
 
-
+    /**
+     * Configuration for spring security
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
-                .formLogin(form -> form.loginPage("/login").permitAll())
-                .logout(LogoutConfigurer::permitAll);
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests((authorize) ->
+                        //authorize.anyRequest().authenticated()
+                        authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .anyRequest().authenticated()
+
+                );
+
         return http.build();
     }
 }

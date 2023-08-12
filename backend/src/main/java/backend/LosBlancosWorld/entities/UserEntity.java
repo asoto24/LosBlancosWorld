@@ -5,21 +5,38 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 
+import java.util.Set;
+
+@Data
 @Entity
-@Table(name = "user_entity")
+@Table(name = "user_entity", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class UserEntity {
+
     /**
      * Primary key of the database,
      * the ID of the user.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private long id;
+    private String name;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<RoleEntity> roles;
 
     @NotNull
     @NotEmpty
     private String username;
+
+
     /**
      * Contains the hashed user-password.
      * Does not store the user
@@ -35,12 +52,12 @@ public class UserEntity {
             flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
 
-    public long getUser_id() {
-        return user_id;
+    public long getId() {
+        return id;
     }
 
-    public void setUser_id(long id) {
-        this.user_id = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -58,4 +75,29 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
 }
