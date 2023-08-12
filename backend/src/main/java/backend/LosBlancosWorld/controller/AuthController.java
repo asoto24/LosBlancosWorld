@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 
-//TODO: needs a bit of tweeking to make it functional and finally be able to login a user
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
