@@ -5,6 +5,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import logo from '../assets/madrid_logo.png'; // Path to your logo image
+import { useNavigate } from 'react-router-dom';
 import '../stylesheets/navbar.css'
 
 
@@ -15,13 +16,22 @@ import '../stylesheets/navbar.css'
  * @returns Banner of the page.
  */
 const Banner = () =>{
+    const navigate = useNavigate();
+
+    const handleSignUpClick = () => {
+        navigate('/signup'); // Navigate to the "signup" route
+    };
+
+    const handleSignInClick = () => {
+        navigate('/signin'); // Navigate to the "signin" route
+    };
     return(<div className="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
         <div className="inner-banner-container">
             <img src={logo} alt="logo" className="logo-image"/>
             <div className="space-center website-title">Los Blancos World</div>
             <div className="inner-banner-container-buttons">
-                <button type="button" className="btn blue-bg btn-lg">Sign Up</button>
-                <button type="button" className="btn blue-bg btn-lg">Sign In</button>
+                <button type="button" className="btn blue-bg btn-lg" onClick={handleSignUpClick}>Sign Up</button>
+                <button type="button" className="btn blue-bg btn-lg" onClick={handleSignInClick}>Sign In</button>
             </div>
         </div>
     </div>)
@@ -32,7 +42,7 @@ const Banner = () =>{
  * status of the user, logged in or not.
  */
 const Navbar = () =>{
-    return (<div>
+    return (<>
             <Banner/>
             <nav className="navbar navbar-dark blue-bg">
                 <div className="container-fluid">
@@ -43,6 +53,6 @@ const Navbar = () =>{
                     </button>
                 </div>
             </nav>
-        </div>)
+        </>)
 }
 export default Navbar;
